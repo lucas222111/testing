@@ -1,0 +1,12 @@
+{
+  "name": "geminita6-gta6",
+  "version": "1.0.0",
+  "description": "GeminiTA6 (GTA6) - Vice City Play Menu with Animated Highway & Legendary Rickroll",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js"
+  },
+  "keywords": ["gta6", "geminita6", "rickroll", "vice-city"],
+  "author": "Google DeepMind / Gemini",
+  "license": "MIT"
+}
