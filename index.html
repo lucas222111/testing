@@ -1,0 +1,632 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>GeminiTA6 (GTA6) - Vice City Official Menu</title>
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🌴</text></svg>">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+  <!-- Fullscreen Animated Highway Canvas (Cars Driving Through Vice City) -->
+  <canvas id="highway-canvas" aria-label="Vice City Highway with Cars Driving Through"></canvas>
+
+  <!-- Header Status Bar -->
+  <header class="gta-header">
+    <div class="header-left">
+      <!-- Rockstar Games Parody Badge -->
+      <div class="rockstar-badge">
+        <span class="r-star-icon">R★</span>
+        <span class="r-brand-text">GEMINI GAMES</span>
+      </div>
+
+      <div class="state-location-badge">
+        <span>STATE OF LEONIDA</span>
+        <span class="dot">◆</span>
+        <span>VICE CITY</span>
+      </div>
+
+      <!-- Live Clock & Weather -->
+      <div class="header-ticker">
+        <span class="weather-badge" id="time-indicator-badge">SUNSET DUSK • 78°F</span>
+        <span id="live-vice-clock">10:42 PM</span>
+        <span class="radio-ticker">♪ FLASH FM - Hall & Oates</span>
+      </div>
+    </div>
+
+    <div class="header-right">
+      <!-- Quick Action Buttons -->
+      <div class="header-actions">
+        <button type="button" class="action-pill-btn" id="btn-time-cycle" title="Change Time of Day (Press C)">
+          <span>🌅</span> Time
+        </button>
+        <button type="button" class="action-pill-btn" id="btn-traffic-boost" title="Rush Hour Boost (Press T)">
+          <span>🏎️</span> Boost Traffic
+        </button>
+        <button type="button" class="action-pill-btn" id="btn-toggle-mute" title="Toggle Ambient Audio (Press M)">
+          <span>🔊</span> Ambient Audio: ON
+        </button>
+      </div>
+
+      <!-- Header Wanted Level -->
+      <div class="header-wanted" title="Wanted Level: 1 Star">
+        <span class="star active">★</span>
+        <span class="star">☆</span>
+        <span class="star">☆</span>
+        <span class="star">☆</span>
+        <span class="star">☆</span>
+      </div>
+    </div>
+  </header>
+
+  <!-- Main GTA VI Play Menu Content -->
+  <main class="gta-menu-container">
+    
+    <!-- LEFT COLUMN: Brand Title, Play Button, and Menu Options -->
+    <section class="menu-column" aria-label="Main Play Menu">
+      
+      <!-- GTA VI Logo -->
+      <div class="brand-title-box">
+        <div class="gta6-logo">
+          <h1 class="logo-text-geminita">GeminiTA</h1>
+          <span class="logo-vi-numeral">VI</span>
+        </div>
+        <div class="brand-subtitle">
+          <span>VICE CITY</span>
+          <span class="edition-tag">LEONIDA EDITION</span>
+        </div>
+      </div>
+
+      <!-- Hero Play Button (The Main Trigger for the Rickroll!) -->
+      <div class="hero-play-box">
+        <button type="button" class="btn-hero-play" id="hero-play-trigger" title="Launch GTA 6 Story Mode">
+          <div class="hero-play-label">
+            <span class="hero-play-badge">LUCIA & JASON • CHAPTER 1</span>
+            <span class="hero-play-text">PLAY STORY</span>
+          </div>
+          <span class="hero-play-icon">▶</span>
+        </button>
+      </div>
+
+      <!-- Vertical GTA Navigation Menu -->
+      <nav class="gta-menu-list" role="tablist" aria-label="Game Modes">
+        <button type="button" class="gta-menu-item active" data-action="play" role="tab" aria-selected="true">
+          <div class="item-left">
+            <span class="item-icon">⚡</span>
+            <span>PLAY STORY</span>
+          </div>
+          <span class="item-badge">RECOMMENDED</span>
+        </button>
+
+        <button type="button" class="gta-menu-item" data-action="online" role="tab" aria-selected="false">
+          <div class="item-left">
+            <span class="item-icon">🌐</span>
+            <span>GEMINI ONLINE</span>
+          </div>
+          <span class="item-badge">MULTIPLAYER</span>
+        </button>
+
+        <button type="button" class="gta-menu-item" data-action="radio" role="tab" aria-selected="false">
+          <div class="item-left">
+            <span class="item-icon">📻</span>
+            <span>RADIO STATIONS</span>
+          </div>
+          <span class="item-badge">12 STATIONS</span>
+        </button>
+
+        <button type="button" class="gta-menu-item" data-action="settings" role="tab" aria-selected="false">
+          <div class="item-left">
+            <span class="item-icon">⚙️</span>
+            <span>SETTINGS & GRAPHICS</span>
+          </div>
+          <span class="item-badge">RAY TRACING</span>
+        </button>
+
+        <button type="button" class="gta-menu-item" data-action="credits" role="tab" aria-selected="false">
+          <div class="item-left">
+            <span class="item-icon">⭐</span>
+            <span>SPECIAL CREDITS</span>
+          </div>
+          <span class="item-badge">ROCKSTAR x RICK</span>
+        </button>
+      </nav>
+
+      <!-- Description Box dynamically updated on hover/navigate -->
+      <div class="menu-desc-panel" aria-live="polite">
+        <div class="desc-header">
+          <span class="desc-badge" id="menu-desc-badge">RECOMMENDED</span>
+          <h2 class="desc-title" id="menu-desc-title">STORY MODE: THE VICE CITY HEIST</h2>
+        </div>
+        <p class="desc-body" id="menu-desc-body">
+          Embark on an adrenaline-fueled saga through the sun-bleached neon streets of Vice City and the sprawling swamplands of Leonida. Follow Lucia and Jason as high-stakes crime, trust, and music collide.
+        </p>
+      </div>
+
+    </section>
+
+    <!-- CENTER COLUMN: Scenic Highway Sightline & Click Callout -->
+    <section class="center-column" aria-label="Interactive Highway Callout">
+      <div class="traffic-alert-pill">
+        <span>🌴</span>
+        <span>CLICK ROAD TO SPAWN SUPERCAR • [T] BOOST TRAFFIC</span>
+      </div>
+    </section>
+
+    <!-- RIGHT COLUMN: Character Switcher & Stat Cards -->
+    <aside class="character-column" aria-label="Protagonist Profiles">
+      
+      <!-- Character Switcher Tabs -->
+      <div class="char-switch-header">
+        <button type="button" class="char-switch-btn active" data-char="lucia">LUCIA</button>
+        <button type="button" class="char-switch-btn" data-char="jason">JASON</button>
+      </div>
+
+      <div class="char-card-container">
+        <!-- Lucia Card -->
+        <div class="char-card active" data-char="lucia">
+          <div class="char-card-visual">
+            <svg class="char-avatar-svg" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <circle cx="50" cy="50" r="48" fill="#ff3b94" fill-opacity="0.2" stroke="#ff3b94" stroke-width="2"/>
+              <!-- Stylized Lucia Silhouette with Sunglasses & Gold Hoops -->
+              <circle cx="50" cy="40" r="20" fill="#fbcfe8"/>
+              <path d="M28 85 C28 62, 72 62, 72 85 Z" fill="#ec4899"/>
+              <!-- Hair -->
+              <path d="M26 42 C24 24, 76 24, 74 42 C74 55, 68 62, 68 68 C58 55, 42 55, 32 68 C32 62, 26 55, 26 42 Z" fill="#371b3a"/>
+              <!-- Sunglasses -->
+              <rect x="36" y="38" width="12" height="7" rx="3" fill="#111"/>
+              <rect x="52" y="38" width="12" height="7" rx="3" fill="#111"/>
+              <line x1="48" y1="41" x2="52" y2="41" stroke="#ffd166" stroke-width="2"/>
+              <!-- Gold Earrings -->
+              <circle cx="28" cy="45" r="4" stroke="#ffd166" stroke-width="2" fill="none"/>
+              <circle cx="72" cy="45" r="4" stroke="#ffd166" stroke-width="2" fill="none"/>
+            </svg>
+
+            <div class="char-status-overlay">
+              <span class="char-wanted-tag">WANTED: ★★☆☆☆</span>
+              <span class="char-cash-tag">$1,420,690</span>
+            </div>
+          </div>
+
+          <div class="char-details">
+            <div class="char-name-role">
+              <h3 class="char-name">LUCIA CAMINOS</h3>
+              <span class="char-role">MASTERMIND • SHARPSHOOTER</span>
+            </div>
+
+            <div class="stat-group">
+              <div class="stat-row">
+                <span>STAMINA</span>
+                <div class="stat-bar-track"><div class="stat-bar-fill" style="width: 88%;"></div></div>
+              </div>
+              <div class="stat-row">
+                <span>SHOOTING</span>
+                <div class="stat-bar-track"><div class="stat-bar-fill" style="width: 94%;"></div></div>
+              </div>
+              <div class="stat-row">
+                <span>DRIVING</span>
+                <div class="stat-bar-track"><div class="stat-bar-fill" style="width: 82%;"></div></div>
+              </div>
+              <div class="stat-row">
+                <span>RICKROLL RESISTANCE</span>
+                <div class="stat-bar-track"><div class="stat-bar-fill" style="width: 100%;"></div></div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Jason Card -->
+        <div class="char-card" data-char="jason">
+          <div class="char-card-visual">
+            <svg class="char-avatar-svg" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <circle cx="50" cy="50" r="48" fill="#00f0ff" fill-opacity="0.2" stroke="#00f0ff" stroke-width="2"/>
+              <!-- Stylized Jason Silhouette with Backward Cap and Aviators -->
+              <circle cx="50" cy="42" r="19" fill="#fed7aa"/>
+              <path d="M28 85 C28 65, 72 65, 72 85 Z" fill="#0284c7"/>
+              <!-- Backward Cap -->
+              <path d="M29 36 C30 22, 70 22, 71 36 L75 38 L25 38 Z" fill="#0f172a"/>
+              <!-- Aviators -->
+              <polygon points="36,40 47,40 45,48 37,47" fill="#1e293b"/>
+              <polygon points="53,40 64,40 63,47 55,48" fill="#1e293b"/>
+              <line x1="47" y1="42" x2="53" y2="42" stroke="#ffd166" stroke-width="1.5"/>
+              <!-- Stubble -->
+              <path d="M42 53 Q50 58 58 53" stroke="#78350f" stroke-width="1.5" stroke-dasharray="2,2" fill="none"/>
+            </svg>
+
+            <div class="char-status-overlay">
+              <span class="char-wanted-tag">WANTED: ★☆☆☆☆</span>
+              <span class="char-cash-tag">$986,500</span>
+            </div>
+          </div>
+
+          <div class="char-details">
+            <div class="char-name-role">
+              <h3 class="char-name">JASON CONRAD</h3>
+              <span class="char-role">WHEELMAN • DEMOLITIONS</span>
+            </div>
+
+            <div class="stat-group">
+              <div class="stat-row">
+                <span>STAMINA</span>
+                <div class="stat-bar-track"><div class="stat-bar-fill" style="width: 92%;"></div></div>
+              </div>
+              <div class="stat-row">
+                <span>SHOOTING</span>
+                <div class="stat-bar-track"><div class="stat-bar-fill" style="width: 80%;"></div></div>
+              </div>
+              <div class="stat-row">
+                <span>DRIVING</span>
+                <div class="stat-bar-track"><div class="stat-bar-fill" style="width: 98%;"></div></div>
+              </div>
+              <div class="stat-row">
+                <span>RICKROLL RESISTANCE</span>
+                <div class="stat-bar-track"><div class="stat-bar-fill" style="width: 95%;"></div></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </aside>
+
+  </main>
+
+  <!-- Footer Keyboard & Controller Hints -->
+  <footer class="gta-footer">
+    <div class="control-hints">
+      <div class="hint-pill"><span class="key-cap">W</span><span class="key-cap">S</span> or <span class="key-cap">↑</span><span class="key-cap">↓</span> Navigate</div>
+      <div class="hint-pill"><span class="key-cap">ENTER</span> Select Option</div>
+      <div class="hint-pill"><span class="key-cap">C</span> Time of Day</div>
+      <div class="hint-pill"><span class="key-cap">T</span> Boost Traffic</div>
+      <div class="hint-pill"><span class="key-cap">M</span> Mute Sound</div>
+    </div>
+    <div class="footer-copyright">
+      <span>ROCKSTAR NORTH & GEMINI GAMES • LEONIDA STATE • 2026</span>
+    </div>
+  </footer>
+
+  <!-- ==========================================================================
+       THE GRAND RICKROLL TAKEOVER SCREEN (Never Gonna Give You Up!)
+       ========================================================================== -->
+  <div id="rickroll-screen" aria-hidden="true" role="region" aria-label="GTA 6 Gameplay & Rickroll Presentation">
+    
+    <!-- Stage 1: Authentic GTA VI Loading Screen -->
+    <div id="gta-loading-screen">
+      <div class="loading-art-backdrop"></div>
+      
+      <div class="loading-art-content">
+        <div>
+          <h2 class="loading-header-title">INITIALIZING<br>LEONIDA...</h2>
+          <p style="color: #ff3b94; font-weight: 800; letter-spacing: 3px; font-size: 13px; margin-top: 10px;">
+            VICE CITY POLICE DEPARTMENT • CODE RED
+          </p>
+        </div>
+
+        <!-- Silhouette Art of Rick Astley in Miami Vice trenchcoat -->
+        <svg class="loading-rick-silhouette" viewBox="0 0 100 120" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <!-- Trenchcoat & Collar -->
+          <path d="M30 40 L50 30 L70 40 L82 110 L18 110 Z" fill="#ffd166" fill-opacity="0.85"/>
+          <!-- Lapels -->
+          <polygon points="50,45 38,70 50,75" fill="#f59e0b"/>
+          <polygon points="50,45 62,70 50,75" fill="#d97706"/>
+          <!-- Head / Signature 80s Pompadour Hair -->
+          <circle cx="50" cy="24" r="10" fill="#fde68a"/>
+          <path d="M40 24 C40 10, 60 10, 60 24 C62 18, 58 14, 50 14 C42 14, 38 18, 40 24 Z" fill="#b45309"/>
+          <!-- Sunglasses -->
+          <rect x="43" y="22" width="6" height="3" rx="1" fill="#111"/>
+          <rect x="51" y="22" width="6" height="3" rx="1" fill="#111"/>
+          <!-- Vintage Microphone in Hand -->
+          <line x1="68" y1="65" x2="78" y2="85" stroke="#ccc" stroke-width="3"/>
+          <ellipse cx="68" cy="63" rx="4" ry="6" fill="#e2e8f0" stroke="#94a3b8" stroke-width="1.5"/>
+        </svg>
+      </div>
+
+      <div class="loading-footer-box">
+        <div class="loading-tips-row">
+          <span id="loading-tip-text">LOADING VICE CITY SHADERS...</span>
+          <div class="rockstar-spinner"></div>
+        </div>
+        <div class="loading-bar-track">
+          <div id="loading-progress-bar"></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Stage 2: The Rickroll Video Player & HUD -->
+    <div id="rickroll-player-container" class="hidden">
+      
+      <!-- Fullscreen YouTube Embed (Auto-plays Never Gonna Give You Up) -->
+      <iframe 
+        id="yt-rickroll-frame" 
+        src="" 
+        title="Rick Astley - Never Gonna Give You Up"
+        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" 
+        allowfullscreen>
+      </iframe>
+
+      <!-- Fallback Interactive 80s Synth Stage (Guaranteed zero-delay instant backup!) -->
+      <div id="synth-rick-stage" class="hidden">
+        <div class="synth-stage-lights"></div>
+        <svg class="synth-dancing-rick" viewBox="0 0 100 130" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <!-- 80s Striped Polo & Trenchcoat -->
+          <path d="M30 42 L50 32 L70 42 L80 115 L20 115 Z" fill="#ff007f" fill-opacity="0.9"/>
+          <path d="M42 45 L58 45 L54 110 L46 110 Z" fill="#ffffff"/>
+          <circle cx="50" cy="24" r="11" fill="#ffd166"/>
+          <!-- Iconic Rick Astley Quiff Hair -->
+          <path d="M38 22 C38 8, 62 8, 62 22 C64 14, 56 12, 50 12 C44 12, 36 14, 38 22 Z" fill="#ea580c"/>
+          <!-- Cool shades -->
+          <rect x="42" y="21" width="7" height="4" rx="1.5" fill="#000"/>
+          <rect x="51" y="21" width="7" height="4" rx="1.5" fill="#000"/>
+          <!-- Microphone -->
+          <line x1="72" y1="58" x2="80" y2="80" stroke="#00f0ff" stroke-width="3"/>
+          <circle cx="71" cy="56" r="5" fill="#00f0ff"/>
+        </svg>
+        <p style="font-family: var(--gta-font); font-size: 28px; color: #00f0ff; letter-spacing: 2px; margin-top: 14px;">
+          RETRO SYNTH ENGINE • NEVER GONNA GIVE YOU UP
+        </p>
+      </div>
+
+      <!-- Grand GTA "RICKROLLED" Slam Banner -->
+      <div id="wasted-banner" class="hidden">
+        <h1 class="wasted-text-rickrolled">RICKROLLED</h1>
+        <span class="wasted-sub-text">MISSION FAILED: YOU GOT RICKROLLED BY RICK ASTLEY</span>
+      </div>
+
+      <!-- In-Game GTA VI HUD Overlay -->
+      <div class="rickroll-hud-layer">
+        
+        <!-- Top HUD: Wanted Stars & Cash -->
+        <div class="hud-top-bar">
+          <div class="hud-wanted-box" title="Leonida State Police Wanted Level">
+            <span style="font-size: 11px; font-weight: 800; color: #ffaa00; margin-right: 4px;">WANTED</span>
+            <div id="hud-wanted-stars">
+              <span class="star active flashing">★</span>
+              <span class="star active flashing">★</span>
+              <span class="star active flashing">★</span>
+              <span class="star active flashing">★</span>
+              <span class="star active flashing">★</span>
+            </div>
+          </div>
+
+          <div class="hud-cash-box" id="hud-cash-counter">
+            $1,987,1987
+          </div>
+        </div>
+
+        <!-- Synchronized Karaoke Subtitles in GTA mission font -->
+        <div class="karaoke-container">
+          <div id="karaoke-subtitles">
+            NEVER GONNA GIVE YOU UP!
+          </div>
+        </div>
+
+        <!-- Bottom HUD: Radar / Minimap & Weapon -->
+        <div class="hud-bottom-bar">
+          <div class="hud-radar-cluster">
+            <div class="hud-radar-disc">
+              <div class="radar-sweep"></div>
+              <div class="radar-player-blip"></div>
+              <div class="radar-bars">
+                <div class="radar-bar-health" title="Health: 100%"></div>
+                <div class="radar-bar-armor" title="Armor: 100%"></div>
+              </div>
+            </div>
+            <div style="font-size: 11px; font-weight: 800; color: #00f0ff; letter-spacing: 1px;">
+              VICE CITY BEACH • OCEAN DR
+            </div>
+          </div>
+
+          <div class="hud-weapon-box">
+            <span class="weapon-title">RICK'S GOLDEN MIC</span>
+            <span class="weapon-ammo">∞ / 1987</span>
+          </div>
+        </div>
+
+      </div>
+
+      <!-- Interactive Rickroll Actions Bar -->
+      <div class="rickroll-actions-bar">
+        <button type="button" class="rick-btn" id="btn-add-stars">
+          <span>⭐</span> Add Wanted Star
+        </button>
+        <button type="button" class="rick-btn" id="btn-disco-mode">
+          <span>💃</span> Disco Party Mode
+        </button>
+        <button type="button" class="rick-btn" id="btn-toggle-player">
+          <span>🎹</span> Retro Synth Mode
+        </button>
+        <button type="button" class="rick-btn" id="btn-exit-rickroll">
+          <span>↩</span> Return to Menu (Esc)
+        </button>
+      </div>
+
+      <!-- Confetti Canvas for Disco Party Mode -->
+      <canvas id="confetti-canvas"></canvas>
+
+    </div>
+
+  </div>
+
+  <!-- ==========================================================================
+       MODAL DIALOGS (modern-web-guidance compliant with <dialog>)
+       ========================================================================== -->
+
+  <!-- Settings Dialog -->
+  <dialog id="settings-dialog" aria-labelledby="settings-dialog-title" closedby="any">
+    <div class="modal-header">
+      <h2 class="modal-title" id="settings-dialog-title">SYSTEM CONFIGURATION</h2>
+      <button type="button" class="modal-close-icon dialog-close-btn" aria-label="Close dialog">×</button>
+    </div>
+    <div class="modal-body">
+      <div class="setting-row">
+        <span>TIME OF DAY</span>
+        <div class="setting-control">
+          <select id="setting-time-of-day">
+            <option value="sunset" selected>Sunset Dusk (Vice City)</option>
+            <option value="midnight">Midnight Neon</option>
+            <option value="golden">Golden Dawn</option>
+          </select>
+        </div>
+      </div>
+
+      <div class="setting-row">
+        <span>TRAFFIC DENSITY</span>
+        <div class="setting-control">
+          <select id="setting-traffic-density">
+            <option value="light">Light Cruising</option>
+            <option value="normal" selected>Normal Traffic</option>
+            <option value="rush">Ocean Drive Rush Hour</option>
+          </select>
+        </div>
+      </div>
+
+      <div class="setting-row">
+        <span>CRT SCANLINE EFFECT</span>
+        <div class="setting-control">
+          <input type="checkbox" id="setting-crt-effect">
+        </div>
+      </div>
+
+      <div class="setting-row">
+        <span>RAY TRACING REFLECTIONS</span>
+        <div class="setting-control">
+          <input type="checkbox" checked disabled>
+        </div>
+      </div>
+
+      <div class="setting-row">
+        <span>RICKROLL QUALITY</span>
+        <div class="setting-control">
+          <span style="color: var(--neon-cyan); font-weight: 700;">4K HDR 60FPS</span>
+        </div>
+      </div>
+    </div>
+    <div class="modal-footer">
+      <form method="dialog">
+        <button class="dialog-close-btn" value="close">CONFIRM</button>
+      </form>
+    </div>
+  </dialog>
+
+  <!-- Gemini Online Multiplayer Dialog -->
+  <dialog id="online-dialog" aria-labelledby="online-dialog-title" closedby="any">
+    <div class="modal-header">
+      <h2 class="modal-title" id="online-dialog-title">GEMINI ONLINE - SERVERS</h2>
+      <button type="button" class="modal-close-icon dialog-close-btn" aria-label="Close dialog">×</button>
+    </div>
+    <div class="modal-body">
+      <div class="server-list">
+        <div class="server-item">
+          <div>
+            <div style="color: #fff;">🌴 [US-EAST] Ocean Drive Street Races</div>
+            <div style="font-size: 11px; color: #888;">Ping: 18ms • Freeroam / Drift</div>
+          </div>
+          <span style="color: #4ade80;">64 / 64 FULL</span>
+        </div>
+
+        <div class="server-item">
+          <div>
+            <div style="color: #fff;">⭐ [LEONIDA] Starfish Island Mega-Heist</div>
+            <div style="font-size: 11px; color: #888;">Ping: 24ms • Lucia & Jason Co-op</div>
+          </div>
+          <span style="color: #00f0ff;">3 / 4 JOIN</span>
+        </div>
+
+        <div class="server-item">
+          <div>
+            <div style="color: #fff;">🎤 [VICE CITY] Rick Astley's Karaoke Lounge</div>
+            <div style="font-size: 11px; color: #888;">Ping: 12ms • 100% Never Gonna Give You Up</div>
+          </div>
+          <span style="color: #ff3b94;">99 / 100 HOT</span>
+        </div>
+      </div>
+    </div>
+    <div class="modal-footer">
+      <form method="dialog">
+        <button class="dialog-close-btn" value="close">BACK TO MENU</button>
+      </form>
+    </div>
+  </dialog>
+
+  <!-- Radio Stations Dialog -->
+  <dialog id="radio-dialog" aria-labelledby="radio-dialog-title" closedby="any">
+    <div class="modal-header">
+      <h2 class="modal-title" id="radio-dialog-title">LEONIDA FM RADIO DIAL</h2>
+      <button type="button" class="modal-close-icon dialog-close-btn" aria-label="Close dialog">×</button>
+    </div>
+    <div class="modal-body">
+      <div class="radio-station-list">
+        <div class="station-item" style="border-left: 4px solid var(--neon-pink);">
+          <div>
+            <div style="color: #fff;">106.7 FLASH FM</div>
+            <div style="font-size: 11px; color: #888;">Host: Toni • 80s Synth Pop & New Wave</div>
+          </div>
+          <span style="color: var(--neon-pink);">TUNED IN</span>
+        </div>
+
+        <div class="station-item">
+          <div>
+            <div style="color: #fff;">103.1 WAVE 103</div>
+            <div style="font-size: 11px; color: #888;">Host: Adam First • Post-Punk & Darkwave</div>
+          </div>
+          <span style="color: #888;">TUNE</span>
+        </div>
+
+        <div class="station-item">
+          <div>
+            <div style="color: #fff;">105.3 FEVER 105</div>
+            <div style="font-size: 11px; color: #888;">Host: Oliver "Ladykiller" Biscuit • Disco & Soul</div>
+          </div>
+          <span style="color: #888;">TUNE</span>
+        </div>
+
+        <div class="station-item" style="border-left: 4px solid var(--sunset-gold);">
+          <div>
+            <div style="color: #fff;">87.9 ASTLEY FM</div>
+            <div style="font-size: 11px; color: #ffd166;">24/7 Never Gonna Give You Up On Repeat</div>
+          </div>
+          <span style="color: var(--sunset-gold);">LEGENDARY</span>
+        </div>
+      </div>
+    </div>
+    <div class="modal-footer">
+      <form method="dialog">
+        <button class="dialog-close-btn" value="close">DONE</button>
+      </form>
+    </div>
+  </dialog>
+
+  <!-- Special Credits Dialog -->
+  <dialog id="credits-dialog" aria-labelledby="credits-dialog-title" closedby="any">
+    <div class="modal-header">
+      <h2 class="modal-title" id="credits-dialog-title">SPECIAL THANKS & CREDITS</h2>
+      <button type="button" class="modal-close-icon dialog-close-btn" aria-label="Close dialog">×</button>
+    </div>
+    <div class="modal-body">
+      <div style="font-size: 13px; line-height: 1.6; color: #d1d5db;">
+        <p style="margin-bottom: 12px;">
+          <strong style="color: var(--neon-pink);">GeminiTA6 (GTA6)</strong> is a parody homage celebrating the cultural phenomenon of Grand Theft Auto VI and the eternal joy of the Rickroll.
+        </p>
+        <ul style="list-style: none; display: flex; flex-direction: column; gap: 8px;">
+          <li>🌴 <strong>Inspiration:</strong> Rockstar Games & Grand Theft Auto VI</li>
+          <li>🎤 <strong>The Legend:</strong> Rick Astley & "Never Gonna Give You Up" (1987, RCA Records)</li>
+          <li>⚡ <strong>Engineering:</strong> Google DeepMind / Gemini</li>
+          <li>🏎️ <strong>Location:</strong> Vice City & the State of Leonida</li>
+        </ul>
+      </div>
+    </div>
+    <div class="modal-footer">
+      <form method="dialog">
+        <button class="dialog-close-btn" value="close">RESPECT +</button>
+      </form>
+    </div>
+  </dialog>
+
+  <!-- Application Scripts -->
+  <script src="js/audio.js"></script>
+  <script src="js/highway.js"></script>
+  <script src="js/rickroll.js"></script>
+  <script src="js/menu.js"></script>
+
+</body>
+</html>
